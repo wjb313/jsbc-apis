@@ -7,10 +7,15 @@
   "keywords": [],
   "author": "wjb",
   "license": "Unlicense",
+  "browserslist": [
+    "last 1 Chrome versions"
+  ],
   "dependencies": {
     "async-redis": "^1.1.7",
+    "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
     "connect-redis": "^4.0.4",
+    "core-js": "^3.6.5",
     "date-fns": "^2.11.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
