@@ -1,54 +1,14 @@
-const fetch = require('node-fetch')
-
 const express = require('express')
+const graphqlHTTP = require('express-graphql').graphqlHTTP
+const schema = require('./schema.js')
+
 const app = express()
 
-app.use(express.static('public'))
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  graphiql: true
+}))
 
-app.get('/data', async (req, res) => {
-  const query = `
-  {
-    search(query: "stars:>50000", type: REPOSITORY, first: 10) {
-      repositoryCount
-      edges {
-        node {
-          ... on Repository {
-            name
-            owner {
-              login
-            }
-            stargazers {
-              totalCount
-            }
-          }
-        }
-      }
-    }
-  }
-`
-  const url = 'https://api.github.com/graphql'
-
-  const options = {
-    method: 'post',
-    headers: {
-      'content-type': 'application/json',
-      'authorization': 'bearer ' + process.env.APIKEY,
-    },
-    body: JSON.stringify({ 'query': query }),
-  }
-
-  let response
-
-  try {
-    response = await fetch(url, options)
-  } catch (error) {
-    console.error(error)
-  }
-  const data = await response.json()
-
-  res.json(data)
+app.listen(3000, () => {
+  console.log('App listening on port 3000')
 })
-
-
-
-app.listen(3000, () => console.log('Server ready'))
