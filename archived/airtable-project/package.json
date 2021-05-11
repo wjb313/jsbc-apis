@@ -17,7 +17,7 @@
     "date-fns": "^2.11.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "pug": "^3.0.0"
   }
 }
